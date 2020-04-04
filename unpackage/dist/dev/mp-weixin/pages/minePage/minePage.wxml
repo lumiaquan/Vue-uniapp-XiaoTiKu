@@ -1,0 +1,1 @@
+<view class="mine-container"><view class="mine-top-container"><view class="top-img"><image src="{{avatar}}"></image></view><view class="top-text">{{''+id+''}}</view><view class="top-text2">吾生也有涯，而知也无涯</view></view><view class="mine-middle"><view class="mine-middle-img"><image src="../../static/联系.png"></image></view><view class="mine-middle-text">关于我们</view></view></view>

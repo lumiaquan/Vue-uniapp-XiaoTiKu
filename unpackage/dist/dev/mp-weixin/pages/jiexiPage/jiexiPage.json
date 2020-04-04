@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "danxuanpage": "/components/danxuan",
+    "duoxuanpage": "/components/duoxuan",
+    "panduanpage": "/components/panduan",
+    "jiandapage": "/components/jianda"
+  }
+}

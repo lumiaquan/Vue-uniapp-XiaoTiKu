@@ -1,0 +1,281 @@
+<template>
+	<view>
+		<view class="top">
+			<view class="zhunkaozheng">
+				<view class="avatar-container">
+					<view class="avatar">
+						<image :src="src" mode=""></image>
+					</view>
+				</view>
+				<view class="text1">
+					准考证
+				</view>
+				<view class="id">
+					{{id}}
+				</view>
+				<view class="zhuti">
+					{{zhuti}}
+				</view>
+				<view class="zhangjie">
+					{{zhangjie}}
+				</view>
+			</view>
+		</view>
+		<view class="bottom">
+			<view class="chengjidan">
+				<view class="text2">
+					测试成绩单
+				</view>
+				<view class="bottom-middle" @click="goto">
+					<view class="danxuan">
+						<view class="text3">
+							单选题
+						</view>
+						<view class="1" style="float:left;width: 2px;height: 43px; background: rgba(64,77,170,1);">
+						</view>
+						<view class="text4">
+							{{danxuanfenshu}}/{{danxuanzongfen}}
+						</view>
+					</view>
+					<view class="duoxuan">
+						<view class="text3">
+							多选题
+						</view>
+						<view class="1" style="float:left;width: 2px;height: 43px; background: rgba(14,135,189,1)">
+						</view>
+						<view class="text4">
+							{{duoxuanfenshu}}/{{duoxuanzongfen}}
+						</view>
+					</view>
+					<view class="panduan">
+						<view class="text3">
+							判断题
+						</view>
+						<view class="1" style="float:left;width: 2px;height: 43px; background: rgba(230,113,35,1);">
+						</view>
+						<view class="text4">
+							{{panduanfenshu}}/{{panduanzongfen}}
+						</view>
+					</view>
+					<view class="jianda">
+						<view class="text3">
+							简答题	
+						</view>
+						<view class="1" style="float:left;width: 2px;height: 43px; background: rgba(3,100,33,1);">
+						</view>
+						<view class="text4">
+							{{jiandafenshu}}/{{jiandazongfen}}
+						</view>
+					</view>
+				</view>
+				<view class="zongfen-container">
+					<view class="zongfen">
+						你的总分是：{{zongfen}}
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import app from '../../App.vue'
+	export default {
+		onLoad(options) {
+			this.zhuti = options.zhuti
+			this.zhangjie = options.zhangjie
+			this.danxuanfenshu = options.danxuanfenshu
+			this.danxuanzongfen = options.danxuanzongfen
+			this.duoxuanfenshu = options.duoxuanfenshu
+			this.duoxuanzongfen = options.duoxuanzongfen
+			this.panduanfenshu = options.panduanfenshu
+			this.panduanzongfen = options.panduanzongfen
+			this.jiandafenshu = options.jiandafenshu
+			this.jiandazongfen = options.jiandazongfen
+			this.zongfen = options.zongfen
+			this.id = app.globalData.userinfo.id
+			this.src = app.globalData.userinfo.avatar
+		},
+		data() {
+			return {
+				id: "",
+				src: "",
+				zhuti: "",
+				zhangjie: "",
+				danxuanfenshu: 0,
+				danxuanzongfen: 0,
+				duoxuanfenshu: 0,
+				duoxuanzongfen: 0,
+				panduanfenshu: 0,
+				panduanzongfen: 0,
+				jiandafenshu: 0,
+				jiandazongfen: 0,
+				zongfen: 0
+			}
+		},
+		methods: {
+			goto (){
+				var url = `../xiangqingPage/xiangqingPage?resList=${this.resList}?zhangjie=${this.zhangjie}`
+				uni.navigateTo({
+					url: url
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	.top{
+		display: flex;
+		justify-content: center;
+		margin-top: 35px;
+	}
+	.zhunkaozheng{
+		width:328px;
+		height:232px;
+		background:rgba(64,158,255,1);
+		box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+		border-radius:10px;
+	}
+	.avatar-container{
+		display: flex;
+		justify-content: center;
+	}
+	.avatar{
+		width: 82px;
+		height: 82px;
+		border-radius: 50%;
+		margin-top: 17px;
+		border: #FFFFFF 1px solid;
+	}
+	.avatar image{
+		width: 82px;
+		height: 82px;
+		border-radius: 50%;
+	}
+	.text1{
+		font-size:19px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(255,255,255,1);
+		line-height:26px;
+		text-align: center;
+		margin-top: 7px;
+	}
+	.id{
+		font-size:19px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(255,255,255,1);
+		line-height:26px;
+		text-align: center;
+		margin-top: 7px;
+	}
+	.zhuti{
+		font-size:14px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(255,255,255,1);
+		line-height:20px;
+		text-align: center;
+		margin: 7px 0;
+	}
+	.zhangjie{
+		font-size:14px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(255,255,255,1);
+		line-height:20px;
+		text-align: center;
+	}
+	.bottom{
+		display: flex;
+		justify-content: center;
+		margin-top: 28px;
+	}
+	.chengjidan{
+		width:328px;
+		height:371px;
+		background:rgba(64,158,255,1);
+		box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+		border-radius:10px;
+	}
+	.text2{
+		font-size:19px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(255,255,255,1);
+		line-height:26px;
+		text-align: center;
+		margin-top: 19px;
+	}
+	.bottom-middle{
+		width:100%;
+		height:252px;
+		background:rgba(255,255,255,1);
+		margin-top: 11px;
+		padding-top: 12px;
+	}
+	.danxuan{
+		width:277px;
+		height:45px;
+		border:2px solid rgba(64,77,170,1);
+		border-radius:10px;
+		margin-left: 25.5px;
+		margin-bottom: 9px;
+		display: flex;
+	}
+	.duoxuan{
+		width:277px;
+		height:46px;
+		border:2px solid rgba(14,135,189,1);
+		margin-left: 25.5px;
+		margin-bottom: 9px;
+		border-radius:10px;
+		display: flex;
+	}
+	.panduan{
+		width:277px;
+		height:46px;
+		border:2px solid rgba(230,113,35,1);
+		margin-left: 25.5px;
+		margin-bottom: 9px;
+		border-radius:10px;
+		display: flex;
+	}
+	.jianda{
+		width:277px;
+		height:45px;
+		border:2px solid rgba(3,100,33,1);
+		margin-left: 25.5px;
+		margin-bottom: 9px;
+		border-radius:10px;
+		display: flex;
+	}
+	.text3{
+		width: 104px;
+		font-size:16px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(0,0,0,1);
+		line-height:41px;
+		text-align: center;
+	}
+	.text4{
+		width: 167px;
+		font-size:16px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(0,0,0,1);
+		line-height:41px;
+		text-align: center;
+	}
+	.zongfen{
+		font-size:26px;
+		font-family:PingFangSC-Medium,PingFang SC;
+		font-weight:500;
+		color:rgba(255,255,255,1);
+		line-height: 63px;
+		text-align: center;
+	}
+</style>
