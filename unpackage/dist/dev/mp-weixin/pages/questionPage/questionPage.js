@@ -75,7 +75,23 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
+    var that = this;
     console.log('App Launch');
+    var openId = uni.getStorageSync("openId");
+    if (openId) {
+      uni.request({
+        url: 'http://127.0.0.1:8081/getCuoti',
+        method: 'GET',
+        data: {
+          openId: openId },
+
+        success: function success(res) {
+          if (res.data.length > 0) {
+            that.$common.userInfo = res.data[0];
+          }
+        } });
+
+    }
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -269,16 +285,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var danxuanpage = function danxuanpage() {return __webpack_require__.e(/*! import() | components/danxuan */ "components/danxuan").then(__webpack_require__.bind(null, /*! ../../components/danxuan.vue */ 99));};var duoxuanpage = function duoxuanpage() {return __webpack_require__.e(/*! import() | components/duoxuan */ "components/duoxuan").then(__webpack_require__.bind(null, /*! ../../components/duoxuan.vue */ 106));};var panduanpage = function panduanpage() {return __webpack_require__.e(/*! import() | components/panduan */ "components/panduan").then(__webpack_require__.bind(null, /*! ../../components/panduan.vue */ 113));};var jiandapage = function jiandapage() {return __webpack_require__.e(/*! import() | components/jianda */ "components/jianda").then(__webpack_require__.bind(null, /*! ../../components/jianda.vue */ 120));};var _default =
+var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var danxuanpage = function danxuanpage() {return __webpack_require__.e(/*! import() | components/danxuan */ "components/danxuan").then(__webpack_require__.bind(null, /*! ../../components/danxuan.vue */ 99));};var duoxuanpage = function duoxuanpage() {return __webpack_require__.e(/*! import() | components/duoxuan */ "components/duoxuan").then(__webpack_require__.bind(null, /*! ../../components/duoxuan.vue */ 106));};var panduanpage = function panduanpage() {return __webpack_require__.e(/*! import() | components/panduan */ "components/panduan").then(__webpack_require__.bind(null, /*! ../../components/panduan.vue */ 113));};var jiandapage = function jiandapage() {return __webpack_require__.e(/*! import() | components/jianda */ "components/jianda").then(__webpack_require__.bind(null, /*! ../../components/jianda.vue */ 120));};var _default =
 {
   onLoad: function onLoad(options) {
-    this.$common.questionList = this.questionList;
     this.tiku = options.tiku;
     this.zhuti = options.zhuti;
     this.zhangjie = options.zhangjie;
-    for (var i = 0; i < that.questionList.length; i++) {
-      that.resList.push(0);
-    }
     var that = this;
     uni.request({
       url: 'http://127.0.0.1:8081/getQuestion',
@@ -286,34 +298,34 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 9));f
       data: {
         tiku: that.tiku,
         zhuti: that.zhuti,
-        zhangjie: that.zhangjie },
+        zhangjie: that.zhangjie } }).
 
-      success: function success(res) {
-        that.questionList = res.data;
-        that.$common.questionList = res.data;
-        var list = res.data;
-        var tixing = list[0].tixing;
-        if (tixing == "danxuan") {
-          that.danxuan = true;
-          that.tixing = "danxuan";
-        }
-        if (tixing == "duoxuan") {
-          that.duoxuan = true;
-          that.tixing = "duoxuan";
-        }
-        if (tixing == "panduan") {
-          that.panduan = true;
-          that.tixing = "panduan";
-        }
-        if (tixing == "jianda") {
-          that.jianda = true;
-          that.tixing = "jianda";
-        }
-        for (var i = 0; i < that.questionList.length; i++) {
-          that.resList.push(0);
-        }
-      } });
-
+    then(function (data) {var _data = _slicedToArray(
+      data, 2),err = _data[0],res = _data[1];
+      that.questionList = res.data;
+      that.$common.questionList = res.data;
+      var list = res.data;
+      var tixing = list[0].tixing;
+      if (tixing == "danxuan") {
+        that.danxuan = true;
+        that.tixing = "danxuan";
+      }
+      if (tixing == "duoxuan") {
+        that.duoxuan = true;
+        that.tixing = "duoxuan";
+      }
+      if (tixing == "panduan") {
+        that.panduan = true;
+        that.tixing = "panduan";
+      }
+      if (tixing == "jianda") {
+        that.jianda = true;
+        that.tixing = "jianda";
+      }
+      for (var i = 0; i < that.questionList.length; i++) {
+        that.resList.push(0);
+      }
+    });
   },
   created: function created() {
 
@@ -326,46 +338,11 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 9));f
       zhangjie: "",
       tixing: "",
       number: 1,
-      danxuan: true,
+      danxuan: false,
       duoxuan: false,
       panduan: false,
       jianda: false,
-      questionList: [
-      {
-        content: "马克思注意诞生于（ ）",
-        A: '1848年2月',
-        B: '1848年1月',
-        C: '1843年2月',
-        D: '1845年3月',
-        tixing: 'danxuan',
-        rightchoice: 'A',
-        zhangjie: '第一章：asdasdasd',
-        zhuti: '马克思主义',
-        number: 1,
-        jiexi: '111222333444555666',
-        _id: '123' },
-
-      {
-        content: "马克思主义包含以下哪些内容",
-        A: ' 实践是认识的基础',
-        B: '认识是主体对客体的能动反映',
-        C: '主观能动性大于一切',
-        D: '资本主义优于社会主义',
-        tixing: 'duoxuan',
-        rightchoices: ["A", "B"],
-        number: 2,
-        jiexi: '111222333444555666',
-        _id: '1234' },
-
-      {
-        content: "卡尔·马克思是马克思主义的创始人之一",
-        tixing: 'panduan',
-        judgementanswer: 'right',
-        number: 3,
-        jiexi: '111222333444555666',
-        _id: '12345' }],
-
-
+      questionList: [],
       danxuanfenshu: 0,
       danxuanzongfen: 0,
       duoxuanfenshu: 0,
@@ -450,21 +427,24 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 9));f
           }
         }
         console.log(this.cuotiList);
-        uni.request({
-          url: 'http://127.0.0.1:8081/addCuoti',
-          method: 'POST',
-          header: {
-            'Content-Type': "application/json" },
+        if (this.cuotiList.length > 0) {
+          uni.request({
+            url: 'http://127.0.0.1:8081/addCuoti',
+            method: 'POST',
+            header: {
+              'Content-Type': "application/json" },
 
-          data: {
-            openId: _App.default.globalData.userinfo.openId,
-            cuotiList: that.cuotiList },
+            data: {
+              openId: _App.default.globalData.userinfo.openId,
+              cuotiList: that.cuotiList },
 
-          success: function success(res) {
-            console.log("上传错题成功！");
-          } });
+            success: function success(res) {
+              console.log("上传错题成功！");
+            } });
 
-        var url = "../jiesuanPage/jiesuanPage?danxuanfenshu=".concat(this.danxuanfenshu, "&duoxuanfenshu=").concat(this.duoxuanfenshu, "&panduanfenshu=").concat(this.panduanfenshu, "&jiandafenshu=").concat(this.jiandafenshu, "\n\t\t\t\t&danxuanzongfen=").concat(
+        }
+        var url = "../jiesuanPage/jiesuanPage?danxuanfenshu=".concat(
+        this.danxuanfenshu, "&duoxuanfenshu=").concat(this.duoxuanfenshu, "&panduanfenshu=").concat(this.panduanfenshu, "&jiandafenshu=").concat(this.jiandafenshu, "\n\t\t\t\t&danxuanzongfen=").concat(
         this.danxuanzongfen, "&duoxuanzongfen=").concat(this.duoxuanzongfen, "&panduanzongfen=").concat(this.panduanzongfen, "&jiandazongfen=").concat(this.jiandazongfen, "&zongfen=").concat(this.zongfen, "\n\t\t\t\t&zhuti=").concat(
         this.questionList[0].zhuti, "&zhangjie=").concat(this.questionList[0].zhangjie);
         this.$common.resList = this.resList;

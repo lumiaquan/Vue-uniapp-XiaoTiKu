@@ -27,7 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
+    var that = this;
     console.log('App Launch');
+    var openId = uni.getStorageSync("openId");
+    if (openId) {
+      uni.request({
+        url: 'http://127.0.0.1:8081/getCuoti',
+        method: 'GET',
+        data: {
+          openId: openId },
+
+        success: function success(res) {
+          if (res.data.length > 0) {
+            that.$common.userInfo = res.data[0];
+          }
+        } });
+
+    }
   },
   onShow: function onShow() {
     console.log('App Show');

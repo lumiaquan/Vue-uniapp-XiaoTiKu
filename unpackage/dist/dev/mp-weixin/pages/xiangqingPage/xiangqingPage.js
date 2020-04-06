@@ -210,7 +210,7 @@ var _default =
   },
   data: function data() {
     return {
-      zhangjie: "第一章：昂克赛拉等级分类算法计算的上岛咖啡",
+      zhangjie: "",
       resList: [],
       rightNum: 0,
       falseQ: [],

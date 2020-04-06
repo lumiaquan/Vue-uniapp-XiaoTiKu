@@ -115,7 +115,7 @@
 		},
 		methods: {
 			goto (){
-				var url = `../xiangqingPage/xiangqingPage?resList=${this.resList}?zhangjie=${this.zhangjie}`
+				var url = `../xiangqingPage/xiangqingPage?zhangjie=${this.zhangjie}`
 				uni.navigateTo({
 					url: url
 				})

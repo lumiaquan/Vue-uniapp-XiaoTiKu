@@ -1,5 +1,7 @@
 export default {
 	questionList:[],
 	resList: [],
-	falseQ: []
+	falseQ: [],
+	cuotiList: [],
+	userInfo: {}
 }

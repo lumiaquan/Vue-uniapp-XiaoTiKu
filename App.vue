@@ -1,7 +1,23 @@
 <script>
 	export default {
 		onLaunch: function() {
+			var that = this
 			console.log('App Launch')
+			var openId = uni.getStorageSync("openId")
+			if(openId){
+				uni.request({
+					url: 'http://127.0.0.1:8081/getCuoti',
+					method: 'GET',
+					data: {
+						openId: openId
+					},
+					success(res) {
+						if(res.data.length>0){
+							that.$common.userInfo = res.data[0]
+						}
+					}
+				})
+			}
 		},
 		onShow: function() {
 			console.log('App Show')

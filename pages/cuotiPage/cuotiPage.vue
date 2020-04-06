@@ -19,13 +19,13 @@
 		<view class="cuoti-middle">
 			
 		</view>
-		<view class="cuoti-bottom" v-for="(item,index) in cuotiList" :key="index" @click="goto(index)">
+		<view class="cuoti-bottom" v-for="(item,index) in zhangjieLit" :key="index" @click="goto(index)">
 			<view class="cuoti-bottom-list">
 				<view class="cuoti-bottom-img">
 					<image src="../../static/铃铛.png"></image>
 				</view>
 				<view class="cuoti-bottom-text">
-					{{item.zhangjie}}
+					{{item}}
 				</view>
 			</view>
 			<view class="cuoti-bottom-line">
@@ -36,9 +36,66 @@
 </template>
 
 <script>
+	import app from '../../App.vue'
 	export default {
+		onLoad() {
+			var that = this
+			if(app.globalData.userinfo.openId){
+				
+			}else{
+				uni.navigateTo({
+					url: '../loginPage/loginPage'
+				})
+			}
+			if(this.$common.cuotiList.length>0){
+				this.list = this.$common.cuotiList
+				for(var i=0;i<this.list.length;i++){
+					if(this.zhangjieLit.includes(this.list[i].zhangjie)){
+						var a = this.zhangjieLit.indexOf(this.list[i].zhangjie)
+						this.qList[a].qList.push(this.list[i])
+					}else{
+						this.zhangjieLit.push(this.list[i].zhangjie)
+						var a = this.zhangjieLit.indexOf(this.list[i].zhangjie)
+						this.qList.push({qList:[]})
+						this.qList[a].qList.push(this.list[i])
+					}
+				}
+			}else{
+				console.log(this.$common.userInfo)
+				uni.request({
+					url: 'http://127.0.0.1:8081/getCuotiList',
+					method: 'POST',
+					header: {
+						'Content-Type': "application/json"
+					},
+					data: {
+						cuotiList: that.$common.userInfo.cuotiList
+					},
+					success(res) {
+						that.$common.cuotiList = res.data
+						console.log(res.data)
+						that.list = that.$common.cuotiList
+						for(var i=0;i<that.list.length;i++){
+							if(that.zhangjieLit.includes(that.list[i].zhangjie)){
+								var a = that.zhangjieLit.indexOf(that.list[i].zhangjie)
+								that.qList[a].qList.push(that.list[i])
+							}else{
+								that.zhangjieLit.push(that.list[i].zhangjie)
+								var a = that.zhangjieLit.indexOf(that.list[i].zhangjie)
+								that.qList.push({qList:[]})
+								that.qList[a].qList.push(that.list[i])
+							}
+						}
+					}
+				})
+			}
+		},
+		onShow() {},
 		data() {
 			return {
+				list: [],
+				zhangjieLit: [],
+				qList: [],
 				cuotiList: [
 					{zhangjie:"马克思第一章",qList:[{
 						content: "马克思注意诞生于（ ）",
@@ -79,7 +136,7 @@
 		methods: {
 			goto (e){
 				var url = `../jiexiPage/jiexiPage`
-				this.$common.questionList = this.cuotiList[e].qList
+				this.$common.questionList = this.qList[e].qList
 				uni.navigateTo({
 					url: url
 				})

@@ -75,7 +75,23 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
+    var that = this;
     console.log('App Launch');
+    var openId = uni.getStorageSync("openId");
+    if (openId) {
+      uni.request({
+        url: 'http://127.0.0.1:8081/getCuoti',
+        method: 'GET',
+        data: {
+          openId: openId },
+
+        success: function success(res) {
+          if (res.data.length > 0) {
+            that.$common.userInfo = res.data[0];
+          }
+        } });
+
+    }
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -432,7 +448,7 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 9));f
 //
 //
 //
-var _default = { onLoad: function onLoad(options) {this.zhuti = options.zhuti;this.zhangjie = options.zhangjie;this.danxuanfenshu = options.danxuanfenshu;this.danxuanzongfen = options.danxuanzongfen;this.duoxuanfenshu = options.duoxuanfenshu;this.duoxuanzongfen = options.duoxuanzongfen;this.panduanfenshu = options.panduanfenshu;this.panduanzongfen = options.panduanzongfen;this.jiandafenshu = options.jiandafenshu;this.jiandazongfen = options.jiandazongfen;this.zongfen = options.zongfen;this.id = _App.default.globalData.userinfo.id;this.src = _App.default.globalData.userinfo.avatar;}, data: function data() {return { id: "", src: "", zhuti: "", zhangjie: "", danxuanfenshu: 0, danxuanzongfen: 0, duoxuanfenshu: 0, duoxuanzongfen: 0, panduanfenshu: 0, panduanzongfen: 0, jiandafenshu: 0, jiandazongfen: 0, zongfen: 0 };}, methods: { goto: function goto() {var url = "../xiangqingPage/xiangqingPage?resList=".concat(this.resList, "?zhangjie=").concat(this.zhangjie);uni.navigateTo({ url: url });} } };exports.default = _default;
+var _default = { onLoad: function onLoad(options) {this.zhuti = options.zhuti;this.zhangjie = options.zhangjie;this.danxuanfenshu = options.danxuanfenshu;this.danxuanzongfen = options.danxuanzongfen;this.duoxuanfenshu = options.duoxuanfenshu;this.duoxuanzongfen = options.duoxuanzongfen;this.panduanfenshu = options.panduanfenshu;this.panduanzongfen = options.panduanzongfen;this.jiandafenshu = options.jiandafenshu;this.jiandazongfen = options.jiandazongfen;this.zongfen = options.zongfen;this.id = _App.default.globalData.userinfo.id;this.src = _App.default.globalData.userinfo.avatar;}, data: function data() {return { id: "", src: "", zhuti: "", zhangjie: "", danxuanfenshu: 0, danxuanzongfen: 0, duoxuanfenshu: 0, duoxuanzongfen: 0, panduanfenshu: 0, panduanzongfen: 0, jiandafenshu: 0, jiandazongfen: 0, zongfen: 0 };}, methods: { goto: function goto() {var url = "../xiangqingPage/xiangqingPage?zhangjie=".concat(this.zhangjie);uni.navigateTo({ url: url });} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
