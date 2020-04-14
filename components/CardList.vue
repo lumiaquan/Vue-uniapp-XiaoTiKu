@@ -27,7 +27,6 @@
 </template>
 
 <script>
-	import app from '../App.vue'
 	export default {
 		data() {
 			return {
@@ -36,7 +35,7 @@
 		},
 		methods: {
 			goto(e) {
-				if(app.globalData.userinfo.id){
+				if(this.$common.userinfo.id){
 					var url = this.cardslist[e].url
 				}else{
 					var url = '../loginPage/loginPage'

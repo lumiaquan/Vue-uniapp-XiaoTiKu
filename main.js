@@ -3,7 +3,6 @@ import App from './App'
 
 import common from 'common.js'
 
-
 Vue.config.productionTip = false
 
 Vue.prototype.$common = common

@@ -12,12 +12,12 @@
 			{{content}}
 		</view>
 		<view class="judgement-container">
-			<view :class="(isActive== 1)?'judge-active':'judge'" @click="changeActive(1)">
+			<view :class="(isActive == 1)?'judge-active':'judge'" @click="changeActive(1)">
 				<view class="judge-text">
 					对
 				</view>
 			</view>
-			<view :class="(isActive== 2)?'judge-active':'judge'" @click="changeActive(2)">
+			<view :class="(isActive == 2)?'judge-active':'judge'" @click="changeActive(2)">
 				<view class="judge-text">
 					错
 				</view>

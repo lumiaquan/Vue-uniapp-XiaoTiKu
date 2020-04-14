@@ -13,7 +13,6 @@
 </template>
 
 <script>
-	import app from '../../App.vue'
 	export default {
 		onLoad() {
 			var that = this
@@ -33,7 +32,7 @@
 						method: 'GET', //请求方式,
 						header: '', //请求头  注:在这里不需要写,有没有无所谓
 						success: result => {
-							app.globalData.userinfo.openId = result.data.openid
+							that.$common.userinfo.openId = result.data.openid
 							//响应成功
 							//这里就获取到了openid了
 							uni.setStorage({
@@ -78,8 +77,8 @@
 										key: 'avatar',
 										data: avatarUrl,
 									})
-									app.globalData.userinfo.id = nickName
-									app.globalData.userinfo.avatar = avatarUrl
+									that.$common.userinfo.id = nickName
+									that.$common.userinfo.avatar = avatarUrl
 									that.back()
 								},
 								fail: res => {
@@ -94,15 +93,16 @@
 				})
 			},
 			back() {
+				var that = this
 				uni.showToast({
 					title: "恭喜！授权成功！"
 				})
 				uni.request({
-					url: 'http://127.0.0.1:8081/addUserInfo',
+					url: 'https://magiskq.top:8081/addUserInfo',
 					data:{
-						nickName : app.globalData.userinfo.id,
-						avatarUrl: app.globalData.userinfo.avatar,
-						openId: app.globalData.userinfo.openId
+						nickName : that.$common.userinfo.id,
+						avatarUrl: that.$common.userinfo.avatar,
+						openId: that.$common.userinfo.openId
 					},
 					header:{
 						'Content-Type': 'application/json'

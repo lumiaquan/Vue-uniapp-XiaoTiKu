@@ -193,7 +193,7 @@ var _default =
     this.title = options.tiku;
     this.tiku = options.tiku;
     uni.request({
-      url: "http://127.0.0.1:8081/getMulu",
+      url: "https://magiskq.top:8081/getMulu",
       method: 'GET',
       data: {
         tiku: that.tiku },

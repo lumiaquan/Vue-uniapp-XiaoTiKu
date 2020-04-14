@@ -3,5 +3,11 @@ export default {
 	resList: [],
 	falseQ: [],
 	cuotiList: [],
-	userInfo: {}
+	userInfo: {},
+	userList: [],
+	userinfo:{
+		id: '',
+		avatar: '',
+		openId: ''
+	}
 }

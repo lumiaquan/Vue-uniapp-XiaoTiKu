@@ -6,24 +6,31 @@
 			var openId = uni.getStorageSync("openId")
 			if(openId){
 				uni.request({
-					url: 'http://127.0.0.1:8081/getCuoti',
+					url: 'https://magiskq.top:8081/getCuoti',
 					method: 'GET',
 					data: {
 						openId: openId
 					},
 					success(res) {
 						if(res.data.length>0){
-							that.$common.userInfo = res.data[0]
+							uni.setStorageSync('cuotiList',res.data[0].cuotiList)
 						}
 					}
 				})
 			}
+			uni.request({
+				url: 'https://magiskq.top:8081/getUserList',
+				method: 'GET',
+				success(res) {
+					that.$common.userList = res.data
+				}
+			})
 		},
 		onShow: function() {
-			console.log('App Show')
-			this.globalData.userinfo.id = uni.getStorageSync("id")
-			this.globalData.userinfo.avatar = uni.getStorageSync("avatar")
-			this.globalData.userinfo.openId = uni.getStorageSync("openId")
+			console.log('App Show')	
+			this.$common.userinfo.id = uni.getStorageSync("id")
+			this.$common.userinfo.avatar = uni.getStorageSync("avatar")
+			this.$common.userinfo.openId = uni.getStorageSync("openId")
 		},
 		onHide: function() {
 			console.log('App Hide')

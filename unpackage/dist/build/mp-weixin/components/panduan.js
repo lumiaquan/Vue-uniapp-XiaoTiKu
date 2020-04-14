@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/panduan"],{"0096":function(t,i,n){"use strict";n.r(i);var e=n("014a"),s=n("f12d");for(var r in s)"default"!==r&&function(t){n.d(i,t,function(){return s[t]})}(r);n("eaf2");var u,a=n("f0c5"),c=Object(a["a"])(s["default"],e["b"],e["c"],!1,null,null,null,!1,e["a"],u);i["default"]=c.exports},"014a":function(t,i,n){"use strict";var e,s=function(){var t=this,i=t.$createElement;t._self._c},r=[];n.d(i,"b",function(){return s}),n.d(i,"c",function(){return r}),n.d(i,"a",function(){return e})},"48e8":function(t,i,n){},"4a58":function(t,i,n){"use strict";Object.defineProperty(i,"__esModule",{value:!0}),i.default=void 0;var e={created:function(){var t=this.questionList[this.number-1];"l"==this.tag&&(t=this.questionList[this.qNumber]),this.content=t.content,this.jiexi=t.jiexi,this.rightAnswer=t.judgementanswer,"right"==this.rightAnswer?this.rightAnswer="对":this.rightAnswer="错"},data:function(){return{content:"",isActive:0,jiexi:"",rightAnswer:""}},methods:{changeActive:function(t){this.isActive=t},changeQuestion:function(t){var i={},n="";1==this.isActive&&(n="right"),2==this.isActive&&(n="false"),i="l"==this.tag?{ps:t}:"提交"==this.nextText?{ps:t,number:this.number-1,answer:n,submit:!0,tixing:this.questionList[this.number-1].tixing}:{ps:t,number:this.number-1,answer:this.isActive,submit:!1,tixing:this.questionList[this.number-1].tixing},this.$emit("func",i)}},props:["number","questionList","nextText","jiexiTag","qNumber","tag"]};i.default=e},eaf2:function(t,i,n){"use strict";var e=n("48e8"),s=n.n(e);s.a},f12d:function(t,i,n){"use strict";n.r(i);var e=n("4a58"),s=n.n(e);for(var r in e)"default"!==r&&function(t){n.d(i,t,function(){return e[t]})}(r);i["default"]=s.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/panduan-create-component',
+    {
+        'components/panduan-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("0096"))
+        })
+    },
+    [['components/panduan-create-component']]
+]);

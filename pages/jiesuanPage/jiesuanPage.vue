@@ -79,7 +79,6 @@
 </template>
 
 <script>
-	import app from '../../App.vue'
 	export default {
 		onLoad(options) {
 			this.zhuti = options.zhuti
@@ -93,8 +92,8 @@
 			this.jiandafenshu = options.jiandafenshu
 			this.jiandazongfen = options.jiandazongfen
 			this.zongfen = options.zongfen
-			this.id = app.globalData.userinfo.id
-			this.src = app.globalData.userinfo.avatar
+			this.id = this.$common.userinfo.id
+			this.src = this.$common.userinfo.avatar
 		},
 		data() {
 			return {

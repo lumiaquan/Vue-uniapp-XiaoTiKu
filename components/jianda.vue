@@ -24,9 +24,23 @@
 				{{jiexi}}
 			</view>
 		</view>
-		<view class="dafen-container">
+		<view class="fenshu">
+			<input type="text" v-model="fenshu" placeholder="本题总分15"/>
+		</view>
+		<view class="dafen-container" @click="changeQuestion(1)">
 			<view class="dafen">
 				给自己打分
+			</view>
+		</view>
+		<view class="jianda-btn">
+			<button class="cu-btn round sm" @click="show">{{text}}</button>
+		</view>
+		<view v-if="flag" class="jiexi-container">
+			<view class="jiexi-title">
+				正确答案:
+			</view>
+			<view class="jiexi">
+				{{rightAnswer}}
 			</view>
 		</view>
 	</view>
@@ -40,13 +54,56 @@
 				neirong = this.questionList[this.qNumber]
 			}
 			this.content = neirong.content
+			this.rightAnswer = neirong.jiandaanswer
 			this.jiexi = neirong.jiexi
 		},
 		data() {
 			return {
 				content: '',
-				jiexi: ''
+				jiexi: '',
+				fenshu: '',
+				flag: false,
+				text: '点击显示答案',
+				rightAnswer: ''
 			};
+		},
+		methods:{
+			show (){
+				if(this.text == '点击显示答案'){
+					this.text = '点击隐藏答案'
+					this.flag = true
+				}else{
+					this.text = '点击显示答案'
+					this.flag = false
+				}
+			},
+			changeQuestion (e){
+				var data = {}
+				if(this.tag == "l"){
+					data = {
+						ps: e
+					}
+				}else {
+					if(this.number == this.questionList.length){
+						data = {
+							ps: e,
+							submit: true,
+							answer: parseInt(this.fenshu),
+							tixing: this.questionList[this.number-1].tixing,
+							number: this.number-1
+						}
+					}else{
+						data = {
+							ps: e,
+							submit: false,
+							answer: parseInt(this.fenshu),
+							tixing: this.questionList[this.number-1].tixing,
+							number: this.number-1
+						}
+					}
+				}
+				this.$emit('func', data);	
+			}
 		},
 		props:[
 			"number",
@@ -113,6 +170,20 @@
 		justify-content: center;
 	}
 	
+	.fenshu{
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+	
+	.fenshu input{
+		width:147px;
+		height:38px;
+		border-radius:19px;
+		border: 1px solid rgba(3,100,33,1);
+		text-align: center;
+	}
+	
 	.dafen{
 		width:147px;
 		height:38px;
@@ -124,5 +195,35 @@
 		font-size: 20px;
 		line-height: 38px;
 		text-align: center;
+	}
+	
+	.jianda-btn{
+		width: 100%;
+		position: relative;
+		margin-top: 10px;
+	}
+	
+	.jianda-btn button{
+		position: absolute;
+		right: 0;
+	}
+	
+	.jiexi-title{
+		margin-left: 7%;
+		width: 86%;
+		font-size: 15px;
+		margin-top: 40px;
+	}
+	
+	.jiexi{
+		margin-left: 7%;
+		padding-top: 10px;
+		width: 86%;
+		font-size:15px;
+		font-family:STHeitiSC-Light,STHeitiSC;
+		font-weight:500;
+		color: #000000;
+		line-height:22px;
+		letter-spacing:1px;
 	}
 </style>

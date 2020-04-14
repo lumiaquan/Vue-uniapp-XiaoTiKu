@@ -23,10 +23,9 @@
 </template>
 
 <script>
-	import app from '../../App.vue'
 	export default {
 		onLoad() {
-			var id = app.globalData.userinfo.id
+			var id = this.$common.userinfo.id
 			if(id){
 				console.log(id)
 			}else{
@@ -36,8 +35,8 @@
 			}
 		},
 		onShow() {
-			var id = app.globalData.userinfo.id
-			var avatar = app.globalData.userinfo.avatar
+			var id = this.$common.userinfo.id
+			var avatar = this.$common.userinfo.avatar
 			if(id){
 				this.id =id
 				this.avatar = avatar

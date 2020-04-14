@@ -1,0 +1,80 @@
+
+.line{
+	width: 100%;
+	height: 2px;
+	background-color: rgba(216,216,216,1);
+	margin-top: 20px;
+}
+.cmt-title{
+	font-size: 20px;
+	margin-top: 5px;
+}
+.cmt-content{
+	width: 100%;
+	padding: 5px 0;
+}
+.cmt-content textarea{
+	width: 100%;
+	height: 50px;
+	border: 1px solid rgba(216,216,216,1);
+	font-size: 13px;
+}
+.cmt-comments{
+	margin-top: 10px;
+	width: 100%;
+}
+.cmt-header{
+	margin-left: 7%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	margin-top: 5px;
+	position: relative;
+}
+.cmt-avatar{
+	margin-right: 20px;
+}
+.cmt-avatar image{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+.cmt-collection{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.cmt-id-time{
+}
+.cmt-id{
+	line-height: 20px;
+}
+.cmt-time{
+	line-height: 20px;
+}
+.cmt-collection{
+	position: absolute;
+	right: 7%;
+	bottom: 9px;
+}
+.cmt-collection image{
+	width: 20px;
+	height: 22px;
+}
+.cmt-bottom{
+	margin: 0 7%;
+	font-size:14px;
+	font-weight:500;
+	color: #000000;
+	line-height:22px;
+	letter-spacing:1px;
+}
+.cmt-line{
+	width: 100%;
+	height: 2px;
+	background-color: rgba(216,216,216,1);
+}
+

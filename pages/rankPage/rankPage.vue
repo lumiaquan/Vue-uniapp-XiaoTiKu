@@ -35,17 +35,15 @@
 
 <script>
 	export default {
+		onLoad() {
+			var userList = this.$common.userList
+			for(var i=0;i<10;i++){
+				this.rankList.push({number:i+1,name:userList[i].nickName,stars:userList[i].collection.length})
+			}
+		},
 		data() {
 			return {
-				rankList: [
-					{number:1,name:"Magisk",stars:66},
-					{number:1,name:"Magisk",stars:66},
-					{number:1,name:"Magisk",stars:66},
-					{number:1,name:"Magisk",stars:66},
-					{number:1,name:"Magisk",stars:66},
-					{number:1,name:"Magisk",stars:66},
-					{number:1,name:"Magisk",stars:66}
-				]
+				rankList: []
 			}
 		},
 		methods: {

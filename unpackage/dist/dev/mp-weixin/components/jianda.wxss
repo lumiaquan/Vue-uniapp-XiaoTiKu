@@ -57,6 +57,22 @@
 	-webkit-justify-content: center;
 	        justify-content: center;
 }
+.fenshu{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	margin-bottom: 20px;
+}
+.fenshu input{
+	width:147px;
+	height:38px;
+	border-radius:19px;
+	border: 1px solid rgba(3,100,33,1);
+	text-align: center;
+}
 .dafen{
 	width:147px;
 	height:38px;
@@ -68,5 +84,31 @@
 	font-size: 20px;
 	line-height: 38px;
 	text-align: center;
+}
+.jianda-btn{
+	width: 100%;
+	position: relative;
+	margin-top: 10px;
+}
+.jianda-btn button{
+	position: absolute;
+	right: 0;
+}
+.jiexi-title{
+	margin-left: 7%;
+	width: 86%;
+	font-size: 15px;
+	margin-top: 40px;
+}
+.jiexi{
+	margin-left: 7%;
+	padding-top: 10px;
+	width: 86%;
+	font-size:15px;
+	font-family:STHeitiSC-Light,STHeitiSC;
+	font-weight:500;
+	color: #000000;
+	line-height:22px;
+	letter-spacing:1px;
 }
 

@@ -12,45 +12,43 @@
 	import duoxuanpage from '../../components/duoxuan.vue'
 	import panduanpage from '../../components/panduan.vue'
 	import jiandapage from '../../components/jianda.vue'
-	import app from '../../App.vue'
 	export default {
 		onLoad(options) {
+			var that = this
 			this.tiku = options.tiku
 			this.zhuti = options.zhuti
 			this.zhangjie = options.zhangjie
 			var that = this
+			var url = `https://magiskq.top:8081/getQuestion?tiku=${that.tiku}&zhangjie=${that.zhangjie}&zhuti=${that.zhuti}`
+			console.log(url)
 			uni.request({
-				url: 'http://127.0.0.1:8081/getQuestion',
+				url: url,
 				method: 'GET',
-				data: {
-					tiku: that.tiku,
-					zhuti: that.zhuti,
-					zhangjie: that.zhangjie
-				}
-			}).then(data => {
-				var [err,res] = data
-				that.questionList = res.data
-				that.$common.questionList = res.data
-				var list = res.data
-				var tixing = list[0].tixing
-				if (tixing == "danxuan") {
-					that.danxuan = true
-					that.tixing = "danxuan"
-				}
-				if (tixing == "duoxuan") {
-					that.duoxuan = true
-					that.tixing = "duoxuan"
-				}
-				if (tixing == "panduan") {
-					that.panduan = true
-					that.tixing = "panduan"
-				}
-				if (tixing == "jianda") {
-					that.jianda = true
-					that.tixing = "jianda"
-				}
-				for (var i = 0; i < that.questionList.length; i++) {
-					that.resList.push(0)
+				success(res) {
+					console.log(res.data)
+					that.questionList = res.data
+					that.$common.questionList = res.data
+					var list = res.data
+					var tixing = list[0].tixing
+					if (tixing == "danxuan") {
+						that.danxuan = true
+						that.tixing = "danxuan"
+					}
+					if (tixing == "duoxuan") {
+						that.duoxuan = true
+						that.tixing = "duoxuan"
+					}
+					if (tixing == "panduan") {
+						that.panduan = true
+						that.tixing = "panduan"
+					}
+					if (tixing == "jianda") {
+						that.jianda = true
+						that.tixing = "jianda"
+					}
+					for (var i = 0; i < that.questionList.length; i++) {
+						that.resList.push(0)
+					}
 				}
 			})
 		},
@@ -114,7 +112,13 @@
 					}
 				}
 				if (data.tixing == 'panduan') {
-					if (data.answer == this.questionList[data.number].judgementanswer) {
+					var answer = ''
+					if(data.answer == 1){
+						answer = 'right'
+					}else{
+						answer = 'false'
+					}
+					if (answer == this.questionList[data.number].judgementanswer) {
 						this.answerList[data.number] = 1
 						this.resList[data.number] = 1
 					} else {
@@ -155,20 +159,45 @@
 					}
 					console.log(this.cuotiList)
 					if(this.cuotiList.length>0){
-						uni.request({
-							url: 'http://127.0.0.1:8081/addCuoti',
-							method: 'POST',
-							header: {
-								'Content-Type': "application/json"
-							},
-							data: {
-								openId: app.globalData.userinfo.openId,
-								cuotiList: that.cuotiList
-							},
-							success(res) {
-								console.log("上传错题成功！")
+						var CuotiList = uni.getStorageSync("cuotiList")
+						if(CuotiList.length>0){
+							for(var i=0;i<CuotiList.length;i++){
+								var flag = that.cuotiList.includes(CuotiList[i])
+								if(flag == false){
+									that.cuotiList.push(CuotiList[i])
+								}
 							}
-						})
+							uni.setStorageSync("cuotiList",that.cuotiList)
+							uni.request({
+								url: 'https://magiskq.top:8081/addCuoti',
+								method: 'POST',
+								header: {
+									'Content-Type': "application/json"
+								},
+								data: {
+									openId: this.$common.userinfo.openId,
+									cuotiList: that.cuotiList
+								},
+								success(res) {
+									console.log("上传错题成功！")
+								}
+							})
+						}else{
+							uni.request({
+								url: 'https://magiskq.top:8081/addCuoti',
+								method: 'POST',
+								header: {
+									'Content-Type': "application/json"
+								},
+								data: {
+									openId: this.$common.userinfo.openId,
+									cuotiList: that.cuotiList
+								},
+								success(res) {
+									console.log("上传错题成功！")
+								}
+							})
+						}
 					}
 					var url =
 						`../jiesuanPage/jiesuanPage?danxuanfenshu=${this.danxuanfenshu}&duoxuanfenshu=${this.duoxuanfenshu}&panduanfenshu=${this.panduanfenshu}&jiandafenshu=${this.jiandafenshu}

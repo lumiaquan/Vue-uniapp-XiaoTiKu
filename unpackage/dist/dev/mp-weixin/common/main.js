@@ -13,7 +13,6 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 9));
 
 var _common = _interopRequireDefault(__webpack_require__(/*! common.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
-
 _vue.default.config.productionTip = false;
 
 _vue.default.prototype.$common = _common.default;
@@ -107,24 +106,31 @@ __webpack_require__.r(__webpack_exports__);
     var openId = uni.getStorageSync("openId");
     if (openId) {
       uni.request({
-        url: 'http://127.0.0.1:8081/getCuoti',
+        url: 'https://magiskq.top:8081/getCuoti',
         method: 'GET',
         data: {
           openId: openId },
 
         success: function success(res) {
           if (res.data.length > 0) {
-            that.$common.userInfo = res.data[0];
+            uni.setStorageSync('cuotiList', res.data[0].cuotiList);
           }
         } });
 
     }
+    uni.request({
+      url: 'https://magiskq.top:8081/getUserList',
+      method: 'GET',
+      success: function success(res) {
+        that.$common.userList = res.data;
+      } });
+
   },
   onShow: function onShow() {
     console.log('App Show');
-    this.globalData.userinfo.id = uni.getStorageSync("id");
-    this.globalData.userinfo.avatar = uni.getStorageSync("avatar");
-    this.globalData.userinfo.openId = uni.getStorageSync("openId");
+    this.$common.userinfo.id = uni.getStorageSync("id");
+    this.$common.userinfo.avatar = uni.getStorageSync("avatar");
+    this.$common.userinfo.openId = uni.getStorageSync("openId");
   },
   onHide: function onHide() {
     console.log('App Hide');

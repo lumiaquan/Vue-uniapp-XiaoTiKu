@@ -1,0 +1,1 @@
+<view><view class="login-img"><image src="../../static/警告.png" mode></image></view><view class="login-text">授权后，才能使用后续功能</view><view class="btn"><button class="loginbtn" type="primary" open-type="getUserInfo" withCredentials="true" data-event-opts="{{[['getuserinfo',[['getUserInfo',['$event']]]]]}}" bindgetuserinfo="__e">点击授权</button></view></view>

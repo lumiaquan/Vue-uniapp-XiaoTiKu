@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小题库",
+  "usingComponents": {
+    "card-list": "/components/CardList"
+  }
+}
